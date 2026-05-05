@@ -1,0 +1,1 @@
+Proyecto para una aplicación de gestión series y películas.
