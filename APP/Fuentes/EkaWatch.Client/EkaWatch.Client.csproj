@@ -9,6 +9,7 @@
     <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
     <BlazorEnableDebugging>false</BlazorEnableDebugging>
     <DebugType>none</DebugType>
+    <StaticWebAssetBasePath>/EkaWatch</StaticWebAssetBasePath>
   </PropertyGroup>
 
   <ItemGroup>
