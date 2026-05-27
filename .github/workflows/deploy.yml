@@ -8,6 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
@@ -19,14 +20,20 @@ jobs:
       - name: Test
         run: dotnet test APP/Fuentes/EkaWatch.Tests/EkaWatch.Tests.csproj -c Release
 
+      - name: Check wwwroot source (IMPORTANT)
+        run: find APP/Fuentes/EkaWatch.Client/wwwroot -type f | sort | head -50
+
       - name: Set base href
         run: sed -i 's|<base href="/" />|<base href="/EkaWatch/" />|g' APP/Fuentes/EkaWatch.Client/wwwroot/index.html
 
       - name: Publish
         run: dotnet publish APP/Fuentes/EkaWatch.Client/EkaWatch.Client.csproj -c Release -o release --nologo
 
-      - name: List lib
-        run: find release/wwwroot/lib -type f 2>&1 | head -20
+      - name: Check publish output (lib + bootstrap)
+        run: find release/wwwroot -type f | grep -i bootstrap || echo "NO BOOTSTRAP FOUND IN PUBLISH"
+
+      - name: Show lib folder (safe)
+        run: find release/wwwroot/lib -type f || echo "NO LIB FOLDER IN PUBLISH OUTPUT"
 
       - name: Fix SPA routing
         run: cp release/wwwroot/index.html release/wwwroot/404.html

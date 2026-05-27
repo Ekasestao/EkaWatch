@@ -24,8 +24,4 @@
     <Folder Include="Properties\" />
   </ItemGroup>
 
-  <ItemGroup>
-	<Content Include="wwwroot\lib\**" CopyToPublishDirectory="PreserveNewest" />
-  </ItemGroup>
-
 </Project>
